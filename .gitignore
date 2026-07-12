@@ -21,10 +21,13 @@ ENV/
 .env
 .env.*
 
-# Database files
+# Database files — generated at runtime on the server
 *.db
 *.sqlite
 *.sqlite3
+
+# Vercel config (not used — deploying on Render)
+vercel.json
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
