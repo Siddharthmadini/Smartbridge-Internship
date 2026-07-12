@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Approval Prediction - Evaluation Outcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="brand-icon">💳</span>
+            Credit Card Approval Prediction
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/predict_form" class="nav-link">Predict Form</a></li>
+            <li><a href="/admin/database" class="nav-link">Database Logs</a></li>
+            <li><a href="/admin/performance" class="nav-link">Model Performance</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="glass-card result-container">
+            {% if info.status == 'approved' %}
+                <div class="result-icon">✅</div>
+                <h2 class="result-title approved">{{ info.prediction_text }}</h2>
+            {% else %}
+                <div class="result-icon">❌</div>
+                <h2 class="result-title rejected">{{ info.prediction_text }}</h2>
+            {% endif %}
+
+            <p style="margin-bottom: 1.5rem;">
+                The applicant's financial and demographic criteria have been analyzed by the machine learning risk classifier.
+            </p>
+
+            <div class="detail-list">
+                <div class="detail-item">
+                    <span class="detail-label">Evaluation Status</span>
+                    <span class="detail-val">
+                        <span class="badge {% if info.status == 'approved' %}badge-approved{% else %}badge-rejected{% endif %}">
+                            {{ info.prediction_text }}
+                        </span>
+                    </span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Risk Category Rating</span>
+                    <span class="detail-val" style="color: {% if info.status == 'approved' %}#16a34a{% else %}#dc2626{% endif %};">
+                        {{ info.risk_category }}
+                    </span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Applicant Gender</span>
+                    <span class="detail-val">{{ info.gender }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Total Annual Income</span>
+                    <span class="detail-val">{{ info.income }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Income Category</span>
+                    <span class="detail-val">{{ info.income_type }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Education Level</span>
+                    <span class="detail-val">{{ info.education }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Scoring Algorithm Used</span>
+                    <span class="detail-val" style="font-family: monospace;">{{ info.model_used }}</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="/predict_form" class="btn btn-primary">🔁 Start New Evaluation</a>
+                <a href="/admin/database" class="btn btn-secondary">📋 Review System Logs</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Credit Card Approval Prediction. All rights reserved. Made with Advanced Agentic AI.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Approval Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="brand-icon">💳</span>
+            Credit Card Approval Prediction
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link active">Home</a></li>
+            <li><a href="/predict_form" class="nav-link">Predict Form</a></li>
+            <li><a href="/admin/database" class="nav-link">Database Logs</a></li>
+            <li><a href="/admin/performance" class="nav-link">Model Performance</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="glass-card">
+            <div class="hero-wrapper">
+                <div class="hero-text">
+                    <span class="tech-tag">⚡ Powered by XGBoost Machine Learning Model</span>
+                    <h1>Automate Credit Risk Decisioning Instantly.</h1>
+                    <p>
+                        A state-of-the-art Credit Card Approval Prediction System. By leveraging advanced machine learning algorithms trained on extensive demographic, financial, and credit history records, it predicts applicant default risks in real time.
+                    </p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="/predict_form" class="btn btn-primary">🚀 Start New Application</a>
+                        <a href="/admin/database" class="btn btn-secondary">📋 View Audit Logs</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <!-- Decorative credit card visual -->
+                    <div style="background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); width: 290px; height: 185px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.25); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; box-shadow: 0 20px 40px rgba(34,197,94,0.3); position: relative; overflow: hidden; color: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.02em;">Credit Card Approval</span>
+                            <span style="font-size: 1.5rem;">💳</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                            <div style="font-size: 0.7rem; opacity: 0.75; letter-spacing: 0.08em; text-transform: uppercase;">Predictive Risk Rating</div>
+                            <div style="font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="display: inline-block; width: 8px; height: 8px; background: #bbf7d0; border-radius: 50%; box-shadow: 0 0 6px #bbf7d0;"></span>
+                                Analyzing Profile...
+                            </div>
+                        </div>
+                        <div style="position: absolute; width: 130px; height: 130px; background: rgba(255,255,255,0.1); filter: blur(28px); top: -30px; right: -30px; border-radius: 50%;"></div>
+                        <div style="position: absolute; width: 80px; height: 80px; background: rgba(187,247,208,0.15); filter: blur(20px); bottom: -20px; left: 20px; border-radius: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h2 class="section-title">✨ Key System Capabilities</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Model-Driven Scoring</h3>
+                    <p>Compares four classification algorithms (Logistic Regression, Decision Tree, Random Forest, and XGBoost) to serve predictions with over 98.7% F1-score accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Class Balance Engineering</h3>
+                    <p>Utilizes advanced SMOTETomek resampling techniques to resolve severe minority class imbalances, guaranteeing high recall on risky applicants.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🗄️</span>
+                    <h3>Audited Relational Database</h3>
+                    <p>Logs all demographic details, payment habits, and predictive risk outcomes in a relational SQLite structure, ready for compliance reporting.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Credit Card Approval Prediction. All rights reserved. Made with Advanced Agentic AI.</p>
+    </footer>
+</body>
+</html>

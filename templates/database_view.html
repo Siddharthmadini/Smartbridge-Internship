@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Approval Prediction - Database Audit Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="brand-icon">💳</span>
+            Credit Card Approval Prediction
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/predict_form" class="nav-link">Predict Form</a></li>
+            <li><a href="/admin/database" class="nav-link active">Database Logs</a></li>
+            <li><a href="/admin/performance" class="nav-link">Model Performance</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="glass-card">
+            <h2 class="section-title">🗄️ Relational Database Audit Logs</h2>
+            <p>
+                The following records show recently executed credit evaluations logged in the SQLite relational database (implementing the ER schema). These logs are crucial for regulatory compliance and audit tracking.
+            </p>
+
+            <hr class="section-divider">
+
+            <div style="overflow-x: auto;">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date &amp; Time</th>
+                            <th>Decision Result</th>
+                            <th>Risk Category</th>
+                            <th>Income Type</th>
+                            <th>Education Level</th>
+                            <th>Housing Type</th>
+                            <th>Model Used</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if rows %}
+                            {% for row in rows %}
+                            <tr>
+                                <td style="font-weight: 600; color: var(--text-main);">#{{ row.PredictionID }}</td>
+                                <td>{{ row.PredictionDate }}</td>
+                                <td>
+                                    <span class="badge {% if row.ApprovalResult == 'Approved' %}badge-approved{% else %}badge-rejected{% endif %}">
+                                        {{ row.ApprovalResult }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="color: {% if row.ApprovalResult == 'Approved' %}#16a34a{% else %}#dc2626{% endif %}; font-weight: 600;">
+                                        {{ row.RiskCategory }}
+                                    </span>
+                                </td>
+                                <td>{{ row.IncomeType }}</td>
+                                <td>{{ row.EducationType }}</td>
+                                <td>{{ row.HousingType }}</td>
+                                <td style="font-family: monospace; font-size: 0.8rem; color: var(--text-muted);">{{ row.ModelName }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                                    No logs found in the database. Run a prediction to create logs.
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 1.5rem; text-align: right;">
+                <a href="/predict_form" class="btn btn-primary">🚀 Start New Evaluation</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Credit Card Approval Prediction. All rights reserved. Made with Advanced Agentic AI.</p>
+    </footer>
+</body>
+</html>

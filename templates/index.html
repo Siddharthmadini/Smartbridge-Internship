@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Approval Prediction - Application Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="brand-icon">💳</span>
+            Credit Card Approval Prediction
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/predict_form" class="nav-link active">Predict Form</a></li>
+            <li><a href="/admin/database" class="nav-link">Database Logs</a></li>
+            <li><a href="/admin/performance" class="nav-link">Model Performance</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="glass-card">
+            <h2 class="section-title">📝 Applicant Credit Evaluation Form</h2>
+            <p>Fill out the demographic, financial, and credit history details below to evaluate the applicant's credit risk profile using our trained XGBoost scoring model.</p>
+
+            <hr class="section-divider">
+
+            <form action="/predict" method="POST">
+                <div class="form-grid">
+                    <!-- Demographic Profile -->
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender" class="form-control" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age (in Years)</label>
+                        <input type="number" name="age" id="age" class="form-control" placeholder="e.g., 34" min="18" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="own_car">Owns a Car?</label>
+                        <select name="own_car" id="own_car" class="form-control" required>
+                            <option value="" disabled selected>Select Option</option>
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="own_realty">Owns Real Estate / Property?</label>
+                        <select name="own_realty" id="own_realty" class="form-control" required>
+                            <option value="" disabled selected>Select Option</option>
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Employment / Financial Details -->
+                    <div class="form-group">
+                        <label for="income">Total Annual Income ($)</label>
+                        <input type="number" name="income" id="income" class="form-control" placeholder="e.g., 55000" min="1000" step="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="income_type">Income Source Category</label>
+                        <select name="income_type" id="income_type" class="form-control" required>
+                            <option value="" disabled selected>Select Income Type</option>
+                            {% for type in categories.income_types %}
+                            <option value="{{ type }}">{{ type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="education">Highest Education Level</label>
+                        <select name="education" id="education" class="form-control" required>
+                            <option value="" disabled selected>Select Education Level</option>
+                            {% for edu in categories.education_types %}
+                            <option value="{{ edu }}">{{ edu }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="family_status">Marital / Family Status</label>
+                        <select name="family_status" id="family_status" class="form-control" required>
+                            <option value="" disabled selected>Select Family Status</option>
+                            {% for fam in categories.family_statuses %}
+                            <option value="{{ fam }}">{{ fam }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="housing_type">Housing Arrangement Type</label>
+                        <select name="housing_type" id="housing_type" class="form-control" required>
+                            <option value="" disabled selected>Select Housing Type</option>
+                            {% for house in categories.housing_types %}
+                            <option value="{{ house }}">{{ house }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="years_employed">Length of Employment (in Years)</label>
+                        <input type="number" name="years_employed" id="years_employed" class="form-control" placeholder="e.g., 5" min="0" step="0.5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="family_members">Total Family Size</label>
+                        <input type="number" name="family_members" id="family_members" class="form-control" placeholder="e.g., 2" min="1" step="1" required>
+                    </div>
+
+                    <!-- Credit History Inputs -->
+                    <div class="form-group">
+                        <label for="num_loans">Number of Active Months (History length)</label>
+                        <input type="number" name="num_loans" id="num_loans" class="form-control" placeholder="e.g., 12" min="0" step="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emi_paid_off">Months with "Fully Paid Off" Status</label>
+                        <input type="number" name="emi_paid_off" id="emi_paid_off" class="form-control" placeholder="e.g., 8" min="0" step="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emi_pastdues">Months with "Past Due / Overdue" Status</label>
+                        <input type="number" name="emi_pastdues" id="emi_pastdues" class="form-control" placeholder="e.g., 4" min="0" step="1" required>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-primary">🔍 Generate Decision</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Credit Card Approval Prediction. All rights reserved. Made with Advanced Agentic AI.</p>
+    </footer>
+</body>
+</html>
